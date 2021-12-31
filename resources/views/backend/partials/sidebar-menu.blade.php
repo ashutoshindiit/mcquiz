@@ -37,6 +37,10 @@
                     </li>
                 @endif
 
+                @if( Auth::user()->can('manage_department'))
+                    <li><a href="{{ route('department.index') }}"><i class="fa fa-edit"></i> Manage Department </a></li>
+                @endif
+                
                 <li><a href="{{ route('quiz.index') }}"><i class="fa fa-edit"></i> Manage Quiz </a></li>
             </ul>
         </div>

@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\QuizController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SearchUserController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\DepartmentController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +41,7 @@ Route::group([  'prefix' => 'i',
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
     Route::get('search/user', [SearchUserController::class,'search'])->name('search-user');
     Route::post('user-permission-update/{id}', [UserController::class,'updatePermission'])->name('user-permission-update');
-    
+    Route::resource('department', DepartmentController::class);
     Route::resource('user', UserController::class);
     Route::resource('role', RoleController::class);
 
