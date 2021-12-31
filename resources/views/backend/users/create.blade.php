@@ -23,9 +23,21 @@
                 <div class="row input_row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Name <span class="required">*</span></label>
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">First Name <span class="required">*</span></label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" name="name" required="required" placeholder="Name" class="form-control col-md-8 col-xs-12">
+                                <input type="text" name="first_name" required="required" placeholder="First Name" class="form-control col-md-8 col-xs-12">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row input_row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Last Name <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="last_name" required="required" placeholder="Last Name" class="form-control col-md-8 col-xs-12">
                                 
                             </div>
                         </div>
@@ -59,7 +71,32 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row input_row">
+                    <div class="col-md-12">
+                        <div class='form-group'>
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Department <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select class="form-control" data-role="select-dropdown" name="department">
+                                    <option value="">Choose Department</option>
+                                    @foreach ($departments as $department)
+                                    <option value="{{ $department->id }}">{{ ucfirst($department->name) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row input_row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-2 col-sm-2 col-xs-12">Designation </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="designation" placeholder="Designation" class="form-control col-md-8 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+                
                 <div class="row input_row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -89,7 +126,8 @@
                         <div class="form-group">
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
                                 {{ csrf_field() }}
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" name="submit" value="close" class="btn btn-success">Submit And Close</button>
+                                <button type="submit" name="submit" value="add_new" class="btn btn-success">Submit And Add New</button>
                                 <a href="{{ route('user.index') }}" class="btn btn-default">Cancel</a>
                             </div>
                         </div>

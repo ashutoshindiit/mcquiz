@@ -38,7 +38,8 @@
                         <thead>
                             <tr>
                                 <th>SN</th>
-                                <th>Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Date/Time Added</th>
                                 <th>User Roles</th>
@@ -50,7 +51,8 @@
                             @foreach ($users as $user)
                             <tr>
                                 <td>{{ (($users->currentPage() - 1 ) * $users->perPage() ) + $loop->iteration }}</td>
-                                <td>{{ ucwords($user->name) }}</td>
+                                <td>{{ ucwords($user->first_name) }}</td>
+                                <td>{{ ucwords($user->last_name) }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
                                 <td>{{  ucwords($user->roles()->pluck('name')->implode(', ')) }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}

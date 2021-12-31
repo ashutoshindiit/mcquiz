@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Quiz as SaveQuizOption;
+use App\Models\Department;
+use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
 {
@@ -29,9 +31,14 @@ class QuizController extends Controller
      */
     public function index()
     {
-        $quizs = $this->quiz->all();
-
-        return view('backend.quiz.index', ['quizs' => $quizs]);
+        $departments = Department::get();
+        $quizs = $this->quiz;
+        if(Auth::user()->hasRole('Super Admin')){
+            $quizs = $quizs->all();
+        }else{
+            $quizs = $quizs->where('department_id',Auth::user()->department_id)->get();
+        }
+        return view('backend.quiz.index', ['quizs' => $quizs,'departments'=>$departments]);
     }
 
     /**
@@ -56,12 +63,18 @@ class QuizController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'quiz_date' => 'required'
         ]);
-
+        if(!Auth::user()->hasRole('Super Admin')){
+            $request->department = Auth::user()->department_id;
+        }
         $slug = $this->makeSlug($request->name);
         $quiz = new $this->quiz;
-
+        $user_id = Auth::user()->id;
         $quiz->name = $request->name;
+        $quiz->quiz_date = $request->quiz_date;
+        $quiz->department_id = $request->department;
+        $quiz->user_id = $user_id;
         $quiz->slug = $slug;
         $quiz->save();
         
@@ -133,7 +146,9 @@ class QuizController extends Controller
             $saveOption = (new SaveQuizOption)->saveOptions($request, $question, $type);
             
         // });
-        
+        if($request->submit == "add_new"){
+            return redirect()->back();
+        }
         return redirect()->route('quiz.edit', $slug);
     }
 

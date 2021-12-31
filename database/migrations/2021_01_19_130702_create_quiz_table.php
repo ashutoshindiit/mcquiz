@@ -17,7 +17,12 @@ class CreateQuizTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->timestamp('quiz_date');
+            $table->bigInteger('department_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
 

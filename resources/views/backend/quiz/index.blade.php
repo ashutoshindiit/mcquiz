@@ -27,8 +27,22 @@
                     <form method="post" action="" class="form-inline">
                         <div class="form-group">
                             <label class="col-form-label name_label">Quiz Name</label>
-                            <input type="text" name="name" class="form-control name_input" placeholder=" Enter Quiz Name">
+                            <input type="text" name="name" class="form-control name_input" placeholder=" Enter Quiz Name" required>
                         </div>
+                        <div class="form-group">
+                            <label class="col-form-label name_label">Date</label>
+                            <input type="date" name="quiz_date" class="form-control name_input" min="{{ date('Y-m-d')}}" value="{{ date('Y-m-d')}}">
+                        </div>   
+                        @if(Auth::user()->hasRole('Super Admin')) 
+                        <div class="form-group">
+                            <label class="col-form-label name_label">Departments</label>
+                            <select class="form-control" data-role="select-dropdown" name="department">
+                                @foreach ($departments as $department)
+                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>                           
+                        @endif
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-success btn_create">Create Quiz</button>
                     </form>
@@ -43,9 +57,10 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Date</th>
                             <th>View</th>
                             <th>Add Questions</th>
-                            <th>Share Options</th>
+                            {{-- <th>Share Options</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -54,6 +69,7 @@
                             <tr>
                                 <th scope="row">{{ $key+1 }}</th>
                                 <td>{{ $quiz->name }}</td>
+                                <td>{{ $quiz->quiz_date->format('Y-m-d') }}</td>
                                 <td>
                                     <a href="{{ route('quiz.edit', $quiz->slug) }}" class="btn btn-sm btn-info">View Quiz</a> 
                                 </td>
@@ -61,9 +77,9 @@
                                        
                                     <a href="{{ route('quiz.edit', [$quiz->slug, 'type' => 'choice']) }}" class="btn btn-sm btn-success">Multiple Choice</a>    
                                     <a href="{{ route('quiz.edit', [$quiz->slug, 'type' => 'checkbox']) }}" class="btn btn-sm btn-success">Checkbox</a>    
-                                    <a href="{{ route('quiz.edit', [$quiz->slug, 'type' => 'answer']) }}" class="btn btn-sm btn-success">Answer</a>
+                                    {{-- <a href="{{ route('quiz.edit', [$quiz->slug, 'type' => 'answer']) }}" class="btn btn-sm btn-success">Answer</a> --}}
                                 </td>
-                                <th>
+                                {{-- <th>
                                     <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target=".bs-example-modal-sm">Invite by Email</button>
                                     <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-sm">
@@ -90,11 +106,11 @@
                                     </div>
                                     <!-- /modals -->
 
-                                    {{-- <a href="https://twitter.com/intent/tweet?{{ route('quiz.invite', $quiz->slug) }}" class="social-share twitter btn btn-sm btn-success">Share on Twitter</a>     --}}
+                                    <a href="https://twitter.com/intent/tweet?{{ route('quiz.invite', $quiz->slug) }}" class="social-share twitter btn btn-sm btn-success">Share on Twitter</a> 
                                     <a class="social-share twitter btn btn-sm btn-success">Share on Twitter</a>
 
                                 
-                                </th>
+                                </th> --}}
                                 <td>
                                     <form action="{{ route('quiz.destroy') }}" method="POST"
                                         onsubmit="return confirm('Delete this record?');">

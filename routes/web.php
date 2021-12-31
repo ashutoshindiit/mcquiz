@@ -7,6 +7,8 @@ use App\Http\Controllers\Backend\SearchUserController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\DepartmentController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\DashboardController as UserDashboardController;
+use App\Http\Controllers\User\QuizController as UserQuizController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,12 +33,20 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
 ]);
 
-Route::get('quiz', 'QuizController@index')->name('quiz');
-Route::get('quiz/accept/{slug}/{token}', 'QuizController@accept')->name('quiz.accept');
-Route::post('quiz/accept/{slug}/{token}', 'QuizController@answer');
+Route::get('quiz', [QuizController::class,'index'])->name('quiz');
+Route::get('quiz/accept/{slug}/{token}', [QuizController::class,'accept'])->name('quiz.accept');
+Route::post('quiz/accept/{slug}/{token}', [QuizController::class,'answer']);
+Route::group([  'prefix' => 'user','as'=>'user.',
+                'middleware' => ['auth']], function()
+{
+    Route::get('/', [UserDashboardController::class,'index'])->name('dashboard');
+    Route::get('/quiz', [UserQuizController::class,'index'])->name('quiz');
+    Route::get('/quiz/{slug}', [UserQuizController::class,'view'])->name('quiz.view');
+    Route::post('quiz/answer/{slug}', [UserQuizController::class,'answer'])->name('quiz.answers');
+});
 
 Route::group([  'prefix' => 'i',
-                'middleware' => ['auth']], function()
+                'middleware' => ['admin_auth']], function()
 {
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
     Route::get('search/user', [SearchUserController::class,'search'])->name('search-user');

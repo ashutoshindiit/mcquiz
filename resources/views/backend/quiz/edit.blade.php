@@ -23,7 +23,7 @@
                                     <p>
                                         <a href="{{ route('quiz.edit', [$quiz->slug, 'type' => 'choice']) }}" class="btn btn-success">Multiple Choice</a>    
                                         <a href="{{ route('quiz.edit', [$quiz->slug, 'type' => 'checkbox']) }}" class="btn btn-success">Checkbox</a>    
-                                        <a href="{{ route('quiz.edit', [$quiz->slug, 'type' => 'answer']) }}" class="btn btn-success">Answer</a>
+                                        {{-- <a href="{{ route('quiz.edit', [$quiz->slug, 'type' => 'answer']) }}" class="btn btn-success">Answer</a> --}}
                                     </p>
                                 </div>
                             </div>
