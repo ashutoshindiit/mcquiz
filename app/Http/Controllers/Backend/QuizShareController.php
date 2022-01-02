@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Quiz;
-use App\Option;
-use App\Question;
-use App\QuizInvite;
+use App\Models\Quiz;
+use App\Models\Option;
+use App\Models\Question;
+use App\Models\QuizInvite;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

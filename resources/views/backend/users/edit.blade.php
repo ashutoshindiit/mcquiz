@@ -35,15 +35,21 @@
                                     <input type="hidden" name="_method" value="put" />
                                     
                                     <div class="item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align" for="name">Name <span class="required">*</span>
+                                        <label class="col-form-label col-md-2 col-sm-2" for="name">First Name <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <input type="text" name="name" value="{{ $user->name }}" id="name"  required="required" class="form-control ">
+                                            <input type="text" name="first_name" value="{{ $user->first_name }}" id="first_name"  required="required" class="form-control ">
                                         </div>
                                     </div>
-                                    
                                     <div class="item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Email <span class="required">*</span>
+                                        <label class="col-form-label col-md-2 col-sm-2" for="name">Last Name <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" name="last_name" value="{{ $user->last_name }}" id="last_name"  required="required" class="form-control ">
+                                        </div>
+                                    </div>                                    
+                                    <div class="item form-group">
+                                        <label class="col-form-label col-md-2 col-sm-2">Email <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
                                             <input type="text" name="email" value="{{ $user->email }}" id="email"  required="required" class="form-control ">
@@ -51,7 +57,7 @@
                                     </div>
                                     
                                     <div class="item form-group">
-                                        <label class="col-form-label col-md-2 col-sm-2 label-align">Role <span class="required">*</span>
+                                        <label class="col-form-label col-md-2 col-sm-2">Role <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6 ">
                                             @foreach ($roles as $role)
@@ -64,7 +70,25 @@
                                             @endforeach
                                         </div>
                                     </div>
-        
+
+                                    <div class="item form-group">
+                                        <label class="col-form-label col-md-2 col-sm-2">Department <span class="required">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <select class="form-control" data-role="select-dropdown" name="department">
+                                                @foreach ($departments as $department)
+                                                <option value="{{ $department->id }}" {{ ($department->id == $user->department_id) ? 'selected' : '' }}>{{ ucfirst($department->name) }}</option>
+                                                @endforeach
+                                            </select>                                            
+                                        </div>
+                                    </div>
+                                    <div class="item form-group">
+                                        <label class="col-form-label col-md-2 col-sm-2" for="name">Designation
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 ">
+                                            <input type="text" name="designation" value="{{ $user->designation }}" id="designation" class="form-control ">
+                                        </div>
+                                    </div>   
                                     <div class="item form-group">
                                         <label class="control-label col-md-2 col-sm-2 col-xs-12">User Password</label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">

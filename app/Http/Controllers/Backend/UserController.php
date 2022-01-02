@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
@@ -33,8 +34,9 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::get();
+        $departments = Department::get();
 
-        return view('backend.users.create', ['roles' => $roles]);
+        return view('backend.users.create', ['roles' => $roles,'departments'=>$departments]);
     }
 
     /**
@@ -46,14 +48,18 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name'     =>'required|max:120',
+            'first_name'  =>'required|max:120',
+            'last_name'  =>'required|max:120',
             'email'    =>'required|email|unique:users',
             'password' =>'required|min:5|confirmed'
         ]);
         
         $user = User::create([
-                                'name' => $request->name, 
+                                'first_name' => $request->first_name, 
+                                'last_name' => $request->last_name, 
                                 'email' => $request->email, 
+                                'department_id' => $request->department, 
+                                'designation' => $request->designation, 
                                 'password' => bcrypt($request->password)
                             ]); 
 
@@ -63,6 +69,9 @@ class UserController extends Controller
         $user->assignRole($my_role); //Assigning role to user
 
         // flash('User successfully added!')->success();
+        if($request->submit == "add_new"){
+            return redirect()->back();
+        }
         return redirect()->route('user.index');
     }
 
@@ -88,8 +97,9 @@ class UserController extends Controller
         $user = User::with('roles')->findOrFail($id); //Get user with specified id
         $roles = Role::get(); //Get all roles
         $permissions = Permission::all();
-        
-        return view('backend.users.edit', compact('user', 'roles', 'permissions')); //pass user and roles data to view
+        $departments = Department::get();
+
+        return view('backend.users.edit', compact('user', 'roles', 'permissions','departments')); //pass user and roles data to view
     }
 
     /**
@@ -104,7 +114,8 @@ class UserController extends Controller
         
         //Validate name, email and password fields
         $this->validate($request, [
-            'name'     =>'required',
+            'first_name'     =>'required',
+            'last_name'     =>'required',
             'email'    =>'required|email|unique:users,email,'.$id,
             'admin_password' =>'required'
         ]);
@@ -123,7 +134,10 @@ class UserController extends Controller
             $user->password = bcrypt($request->password); 
         } else {
             $user->email = $request->email; 
-            $user->name = $request->name; 
+            $user->first_name = $request->first_name; 
+            $user->last_name = $request->last_name; 
+            $user->department_id = $request->department;
+            $user->designation = $request->designation; 
         }
         
         $user->save();
