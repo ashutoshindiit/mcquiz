@@ -3,7 +3,7 @@
 namespace App\Http\Services;
 
 use App\Models\Option;
-use App\UserQuestionAnswer;
+use App\Models\UserQuestionAnswer;
 
 
 class SaveQuizAnswer

@@ -66,7 +66,8 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department = Department::findOrFail($id);
+        return view('backend.departments.edit',compact('department'));
     }
 
     /**
@@ -78,7 +79,17 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'     =>'required',
+        ]);
+
+        $department = Department::findOrFail($id); //Get role specified by id
+        
+        $department->name = $request->name; 
+        
+        $department->save();
+        
+        return redirect()->route('department.index')->with('success', 'Department successfully updated!');
     }
 
     /**

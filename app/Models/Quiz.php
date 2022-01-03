@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Quiz extends Model
 {
@@ -20,4 +21,7 @@ class Quiz extends Model
         return $this->hasMany(Question::Class);
     }
 
+    public function is_attempt(){
+        return $this->hasMany(UserAttemptQuiz::Class)->where('user_id',Auth::user()->id);
+    }
 }

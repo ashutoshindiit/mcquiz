@@ -13,6 +13,7 @@ class CreateQuizTable extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::create('quiz', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -24,6 +25,7 @@ class CreateQuizTable extends Migration
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
         });
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
