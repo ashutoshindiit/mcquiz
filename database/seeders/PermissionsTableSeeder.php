@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -33,5 +35,10 @@ class PermissionsTableSeeder extends Seeder
             'created_at' => date("Y-m-d h:i:s"),
             'updated_at' => date("Y-m-d h:i:s"),
         ]);
+
+        
+        $user = User::findOrFail(1);
+        $my_role = Role::where('id', '=', 1)->firstOrFail();
+        $user->assignRole($my_role); //Assigning role to user
     }
 }

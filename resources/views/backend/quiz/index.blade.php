@@ -72,6 +72,7 @@
                                 <td>{{ $quiz->quiz_date->format('Y-m-d') }}</td>
                                 <td>
                                     <a href="{{ route('quiz.edit', $quiz->slug) }}" class="btn btn-sm btn-info">View Quiz</a> 
+                                    <a href="{{ route('quiz.report', $quiz->slug) }}" class="btn btn-sm btn-info">View Report</a> 
                                 </td>
                                 <td>
                                        

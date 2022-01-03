@@ -42,7 +42,9 @@
                                 <td>{{ $quiz->questions_count }} {{ ($quiz->questions_count > 0) ? 'Questions' : 'Question'; }} </td>
                                 <td>
                                     @if($quiz->is_attempt_count !=1)
-                                    <a href="{{ route('user.quiz.view', $quiz->slug) }}" class="btn btn-sm btn-info">Join Quiz</a> 
+                                        @if($quiz->questions_count > 0)
+                                            <a href="{{ route('user.quiz.view', $quiz->slug) }}" class="btn btn-sm btn-info">Join Quiz</a> 
+                                        @endif
                                     @else
                                     <a href="javascript:void(0);" class="btn btn-sm btn-info">Already Attempt</a> 
                                     @endif

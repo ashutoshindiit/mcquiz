@@ -45,6 +45,11 @@ class QuizController extends Controller
     {
         $user_id = Auth::user()->id;
         $quiz_id = $this->quiz->where('slug',$slug)->first()->id;
+        $is_attempt = UserAttemptQuiz::where('user_id',$user_id)->where('quiz_id',$quiz_id)->get()->count();
+        if($is_attempt > 0)
+        {
+            return redirect()->route('user.quiz')->with('error', 'Allready attempt quiz.');
+        }
         $requestValues = $request->all();
         $data = [];
         
@@ -70,6 +75,7 @@ class QuizController extends Controller
 
                     $data[] =[
                         'user_id' => $user_id,
+                        'quiz_id' => $quiz_id,
                         'question_id' => (int) $question_id,
                         'option_id' => $ans,
                         'is_right' => $is_right
@@ -88,6 +94,7 @@ class QuizController extends Controller
                 
                 $data[] = [
                     'user_id' => $user_id,
+                    'quiz_id' => $quiz_id,
                     'question_id' => (int)$question_id,
                     'option_id' => (int)$answer,
                     'is_right' => $is_right
@@ -95,6 +102,7 @@ class QuizController extends Controller
             } else {
                 $data[] = [
                     'user_id' => $user_id,
+                    'quiz_id' => $quiz_id,
                     'question_id' => (int)$question_id,
                     'option_id' => 0,
                     'is_right' => 0

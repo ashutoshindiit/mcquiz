@@ -16,6 +16,7 @@ class CreateUserQuestionAnswerTable extends Migration
         Schema::create('user_question_answer', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('quiz_id');
             //$table->bigInteger('user_id')->unsigned()->nullable();
             $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('option_id');
@@ -27,6 +28,7 @@ class CreateUserQuestionAnswerTable extends Migration
             //     ->on('users')
             //     ->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('quiz_id')->references('id')->on('quiz')->onDelete('cascade');
             $table->foreign('question_id')
                 ->references('id')
                 ->on('questions')

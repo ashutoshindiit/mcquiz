@@ -17,12 +17,15 @@ class AdminAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin')){
-            return $next($request); 
+        if(Auth::check()){
+            if(Auth::user()->hasRole('Super Admin') || Auth::user()->hasRole('Admin')){
+                return $next($request); 
+            }
+            if(Auth::user()->hasRole('User')){
+                return redirect('/user');
+            }
         }
-        if(Auth::user()->hasRole('User')){
-            return redirect('/user');
-        }
+
         return redirect('/');
     }
 }

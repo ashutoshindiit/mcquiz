@@ -7,48 +7,28 @@ use App\Models\Question;
 use App\Models\UserQuestionAnswer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Quiz;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class DashboardController extends Controller
 {
     
     public function index()
     {
-        $questionAnswers = UserQuestionAnswer::with('questions.options')
-                                    ->paginate(15);
-                                        
-
         $data = [];
+        return view('backend.index', compact('data'));
+    }
 
-        // foreach($questionAnswers as $key => $uqa) {
-        //     $questions = Question::where('id', $uqa->questions->id)->first();
-        //     $data[$key]['question'] = $questions->question;        
-            
-        //     foreach($uqa->questions->options as $qtn) {
-        //         $options = Option::where('question_id', $questions->id)->get();
-        //         foreach($options as $option) {
-        //             if ($option->is_right_option == 1) {
-        //                 $data[$key]['right_options'] = $option->option;
-        //             }
-        //         }
-        //     }
-        // }        
-
-        foreach($questionAnswers as $questions) {
-            // dd($questions->questions);
-            // $userAnswer = Option::where('id', $questions->option_id)
-            //                         ->where('question_id', $questions->question_id)
-            //                         ->get();
-
-            // foreach($userAnswer as $answer) {
-            //     $userQuestionAnswers['user_option'] = $userAnswer->option;
-            //     $userQuestionAnswers['is_right_option'] = $userAnswer->is_right_option;
-
-            // }
-        }
-
-        // dd($questionAnswers);
-
-        return view('backend.index', ['questionAnswers' => $questionAnswers]);
+    public function filterData($from_date = "", $to_date="")
+    {
+        $data = [];
+        $data['user_count'] = User::whereBetween('created_at',[$from_date, $to_date])->role('3')->get()->count();
+        $data['admin_count'] = User::whereBetween('created_at',[$from_date, $to_date])->role('2')->get()->count();
+        $data['department_count'] = Department::whereBetween('created_at',[$from_date, $to_date])->get()->count();
+        $data['quiz_count'] = Quiz::whereBetween('created_at',[$from_date, $to_date])->get()->count();
+        return response()->json(['success'=>true,'data' =>$data]); 
     }
 }

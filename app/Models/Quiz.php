@@ -24,4 +24,9 @@ class Quiz extends Model
     public function is_attempt(){
         return $this->hasMany(UserAttemptQuiz::Class)->where('user_id',Auth::user()->id);
     }
+
+    public function userAttemptQuiz()
+    {
+        return $this->hasMany(UserAttemptQuiz::Class);
+    }
 }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class UserAttemptQuiz extends Model
 {
     use HasFactory;
+    protected $with=['user'];
+    public function user()
+    {
+        return $this->belongsTo(User::Class);
+    }
 }

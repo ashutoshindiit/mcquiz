@@ -45,7 +45,6 @@
                     <h2><strong>Questions</strong></h2>
                     <hr>
                     @foreach ($questions as $question)
-                        
                         <div class="row input_row">
                             <div class="col-md-12">
                                 <div class="form-group">
@@ -65,7 +64,7 @@
                                             <div class="radio">
                                                 <label>
                                                     @foreach ($question->options as $key => $option)
-                                                        <input type="radio" value="{{ $key }}" @if($option->is_right_option == 1) checked="checked" @endif name="answer"> {{ $option->option }}  &nbsp; &nbsp;
+                                                        <input type="radio" value="{{ $key }}" @if($option->is_right_option == 1) checked="checked" @endif name="{{ $option->question_id }}"> {{ $option->option }}  &nbsp; &nbsp;
                                                     @endforeach
                                                 </label>
                                             </div>
@@ -73,14 +72,14 @@
                                             <div class="checkbox">
                                                 <label>
                                                     @foreach ($question->options as $key => $option)
-                                                        <input type="checkbox" value="{{ $key }}" @if($option->is_right_option == 1) checked="checked" @endif name="answer"> {{ $option->option }}  &nbsp; &nbsp;
+                                                        <input type="checkbox" value="{{ $key }}" @if($option->is_right_option == 1) checked="checked" @endif name="{{ $option->question_id }}"> {{ $option->option }}"> {{ $option->option }}  &nbsp; &nbsp;
                                                     @endforeach
                                                 </label>
                                             </div>
-                                        @elseif ($question->type == 'answer')
+                                        {{-- @elseif ($question->type == 'answer')
                                             <label>@if (isset($question->option[0]))
                                                 {{ $question->options[0]->option }}
-                                            @endif</label>
+                                            @endif</label> --}}
                                         @endif
                                     </div>
                                 </div>

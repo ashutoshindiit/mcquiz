@@ -29,8 +29,6 @@ Route::get('/test', [HomeController::class,'test']);
 
 Auth::routes([
     'register' => false, // Registration Routes...
-    'reset' => false, // Password Reset Routes...
-    'verify' => false, // Email Verification Routes...
 ]);
 
 Route::get('quiz', [QuizController::class,'index'])->name('quiz');
@@ -43,6 +41,7 @@ Route::group([  'prefix' => 'user','as'=>'user.',
     Route::get('/quiz', [UserQuizController::class,'index'])->name('quiz');
     Route::get('/quiz/{slug}', [UserQuizController::class,'view'])->name('quiz.view');
     Route::post('quiz/answer/{slug}', [UserQuizController::class,'answer'])->name('quiz.answers');
+    Route::get('/filtered_data/{from_date?}/{to_date?}', [UserDashboardController::class,'filterData'])->name('filtered_data');
 });
 
 Route::group([  'prefix' => 'i',
@@ -61,5 +60,7 @@ Route::group([  'prefix' => 'i',
     Route::post('quiz/edit/{slug}', [QuizController::class,'update']);
     Route::delete('quiz/delete', [QuizController::class,'destroy'])->name('quiz.destroy');
     Route::post('quiz/invite/{slug}', [QuizController::class,'invite'])->name('quiz.invite');
-    
+    Route::get('quiz/report/{slug}', [QuizController::class,'report'])->name('quiz.report');
+    Route::get('quiz/report/user/{slug}/{id}', [QuizController::class,'reportUser'])->name('quiz.report.user');
+    Route::get('/filtered_data/{from_date?}/{to_date?}', [DashboardController::class,'filterData'])->name('filtered_data');
 });

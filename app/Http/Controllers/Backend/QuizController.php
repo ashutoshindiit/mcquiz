@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Quiz as SaveQuizOption;
 use App\Models\Department;
+use App\Models\UserAttemptQuiz;
+use App\Models\UserQuestionAnswer;
 use Illuminate\Support\Facades\Auth;
 
 class QuizController extends Controller
@@ -180,5 +182,20 @@ class QuizController extends Controller
         $addCount = $count + 1;
 
         return $count ? "{$slug}-{$addCount}" : $slug;
+    }
+
+    public function report(Request $request,$slug)
+    {
+        $quiz = $this->quiz->with('userAttemptQuiz')->where('slug', $slug)->firstOrFail();
+        $quiz_id = $quiz->id;
+        return view('backend.quiz.report', ['quiz' => $quiz]);
+    }
+
+    public function reportUser(Request $request,$slug,$id)
+    {
+        $quiz = $this->quiz->where('slug', $slug)->firstOrFail();
+        $questionAnswers = UserQuestionAnswer::where('user_id',$id)->where('quiz_id',$quiz->id)->with('questions.options')
+                                    ->paginate(15);
+        return view('backend.quiz.user-report', ['questionAnswers' => $questionAnswers,'slug'=>$slug]);
     }
 }

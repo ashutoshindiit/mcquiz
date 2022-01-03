@@ -42,7 +42,7 @@
                         <div class="radio">
                             <label>
                                 @foreach ($question->options as $opt_key => $option)
-                                    <input type="radio" value="{{ $option->id }}" name="{{$question->id}}"> {{ $option->option }}  &nbsp; &nbsp;
+                                    <input type="radio" value="{{ $option->id }}" name="{{$question->id}}" required> {{ $option->option }}  &nbsp; &nbsp;
                                 @endforeach
                             </label>
                         </div>
@@ -50,7 +50,7 @@
                         <div class="checkbox">
                             <label>
                                 @foreach ($question->options as $opt_key => $option)
-                                    <input type="checkbox" value="{{ $option->id }}" name="{{ $question->id }}[{{$opt_key}}]"> {{ $option->option }}  &nbsp; &nbsp;
+                                    <input type="checkbox" value="{{ $option->id }}" name="{{ $question->id }}[{{$opt_key}}]" required> {{ $option->option }}  &nbsp; &nbsp;
                                 @endforeach
                             </label>
                         </div>
