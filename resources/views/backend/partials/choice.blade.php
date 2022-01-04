@@ -17,7 +17,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2 col-sm-2 col-xs-12">Option 1 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="options[]" placeholder="Option 1" class="form-control">
+                    <input type="text" name="options[]" placeholder="Option 1" class="form-control" required="required">
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2 col-sm-2 col-xs-12">Option 2 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="options[]" placeholder="Option 2 " class="form-control">
+                    <input type="text" name="options[]" placeholder="Option 2 " class="form-control" required="required">
                     
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2 col-sm-2 col-xs-12">Option 3 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="options[]" placeholder="Option 2 " class="form-control">
+                    <input type="text" name="options[]" placeholder="Option 2 " class="form-control" required="required">
                     
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2 col-sm-2 col-xs-12">Option 4 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" name="options[]" placeholder="Option 4 " class="form-control">
+                    <input type="text" name="options[]" placeholder="Option 4 " class="form-control" required="required">
                     
                 </div>
             </div>
@@ -64,10 +64,10 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class="radio">
                         <label>
-                            <input type="radio" value="0" name="answer" id="option1"> <label for="option1">Option 1</label> &nbsp; &nbsp;
-                            <input type="radio" value="1" name="answer" id="option2"> <label for="option2">Option 2</label> &nbsp; &nbsp;
-                            <input type="radio" value="2" name="answer" id="option3"> <label for="option3">Option 3</label> &nbsp; &nbsp;
-                            <input type="radio" value="3" name="answer" id="option4"> <label for="option4">Option 4</label> &nbsp; &nbsp;
+                            <input type="radio" value="0" name="answer" id="option1" required="required"> <label for="option1">Option 1</label> &nbsp; &nbsp;
+                            <input type="radio" value="1" name="answer" id="option2" required="required"> <label for="option2">Option 2</label> &nbsp; &nbsp;
+                            <input type="radio" value="2" name="answer" id="option3" required="required"> <label for="option3">Option 3</label> &nbsp; &nbsp;
+                            <input type="radio" value="3" name="answer" id="option4" required="required"> <label for="option4">Option 4</label> &nbsp; &nbsp;
                         </label>
                     </div>
                 </div>
