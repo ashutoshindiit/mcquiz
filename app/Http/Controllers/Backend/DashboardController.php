@@ -24,11 +24,22 @@ class DashboardController extends Controller
 
     public function filterData($from_date = "", $to_date="")
     {
+
         $data = [];
-        $data['user_count'] = User::whereBetween('created_at',[$from_date, $to_date])->role('3')->get()->count();
-        $data['admin_count'] = User::whereBetween('created_at',[$from_date, $to_date])->role('2')->get()->count();
-        $data['department_count'] = Department::whereBetween('created_at',[$from_date, $to_date])->get()->count();
-        $data['quiz_count'] = Quiz::whereBetween('created_at',[$from_date, $to_date])->get()->count();
+        if(Auth::user()->hasRole('Super Admin')){
+            $data['user_count'] = User::whereBetween('created_at',[$from_date, $to_date])->role('3')->get()->count();
+            $data['admin_count'] = User::whereBetween('created_at',[$from_date, $to_date])->role('2')->get()->count();
+            $data['department_count'] = Department::whereBetween('created_at',[$from_date, $to_date])->get()->count();
+            $data['quiz_count'] = Quiz::whereBetween('created_at',[$from_date, $to_date])->get()->count();
+        }else{
+            $department_id = Auth::user()->department_id;
+            $data['user_count'] = User::whereBetween('created_at',[$from_date, $to_date])->where('department_id',$department_id)->role('3')->get()->count();
+            $data['admin_count'] = '';
+            $data['department_count'] = '';
+            $data['quiz_count'] = Quiz::whereBetween('created_at',[$from_date, $to_date])->where('department_id',$department_id)->get()->count();
+
+        }
+
         return response()->json(['success'=>true,'data' =>$data]); 
     }
 }

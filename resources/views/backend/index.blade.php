@@ -25,9 +25,9 @@
 </div>
 <div class="clearfix"></div>
 <div class="row">
-    <div class="col-xl-6 col-lg-6">
+    <div class="col-xl-12 col-lg-12">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <div class="card widget-flat">
                     <div class="card-body">
                         <div class="float-end">
@@ -38,7 +38,8 @@
                     </div>
                 </div> 
             </div>
-            <div class="col-sm-6">
+            @if(Auth::user()->hasRole('Super Admin'))
+            <div class="col-sm-3">
                 <div class="card widget-flat">
                     <div class="card-body">
                         <div class="float-end">
@@ -48,12 +49,8 @@
                         <h3 class="mt-3 mb-3 report_departments"></h3>
                     </div>
                 </div> 
-            </div>            
-        </div>
-    </div>
-    <div class="col-xl-6 col-lg-6">
-        <div class="row">
-            <div class="col-sm-6">
+            </div>   
+            <div class="col-sm-3">
                 <div class="card widget-flat">
                     <div class="card-body">
                         <div class="float-end">
@@ -64,8 +61,9 @@
                         <p class="mb-0 text-muted">
                     </div>
                 </div> 
-            </div>
-            <div class="col-sm-6">
+            </div>   
+            @endif 
+            <div class="col-sm-3">
                 <div class="card widget-flat">
                     <div class="card-body">
                         <div class="float-end">
@@ -75,9 +73,9 @@
                         <h3 class="mt-3 mb-3 report_users"></h3>
                     </div>
                 </div> 
-            </div>            
+            </div>                             
         </div>
-    </div>    
+    </div>   
 </div>
 <div class="row">
     
