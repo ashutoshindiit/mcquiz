@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SearchUserController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\DepartmentController;
+use App\Http\Controllers\Backend\ScoreboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\DashboardController as UserDashboardController;
 use App\Http\Controllers\User\QuizController as UserQuizController;
@@ -63,4 +64,6 @@ Route::group([  'prefix' => 'i',
     Route::get('quiz/report/{slug}', [QuizController::class,'report'])->name('quiz.report');
     Route::get('quiz/report/user/{slug}/{id}', [QuizController::class,'reportUser'])->name('quiz.report.user');
     Route::get('/filtered_data/{from_date?}/{to_date?}', [DashboardController::class,'filterData'])->name('filtered_data');
+    Route::get('/scoreboard', [ScoreboardController::class,'index'])->name('scoreboard');
+    Route::get('/scoreboard/user/{id}', [ScoreboardController::class,'viewDetails'])->name('scoreboard.user');
 });

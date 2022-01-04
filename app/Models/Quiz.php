@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class Quiz extends Model
 {
+    use \Awobaz\Compoships\Compoships;
+    
     protected $table = 'quiz';
     protected $dates = ['quiz_date'];
     protected $fillable = [

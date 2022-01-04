@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserQuestionAnswer extends Model
 {
+    use \Awobaz\Compoships\Compoships;
+
     protected $table = 'user_question_answer';
     
     public $timestamps = true;
@@ -14,5 +16,5 @@ class UserQuestionAnswer extends Model
     public function questions() {
         return $this->belongsTo(Question::Class, 'question_id');
     }
-    
+
 }

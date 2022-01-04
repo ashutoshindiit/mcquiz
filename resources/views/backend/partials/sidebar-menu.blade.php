@@ -24,6 +24,7 @@
             <ul class="nav side-menu">
                 
                 <li><a href="{{ route('dashboard') }}"><i class="fa fa-home"></i> Home </a></li>
+                <li><a href="{{ route('scoreboard') }}"><i class="fa fa-star"></i> Scoreboard </a></li>
                 @if( Auth::user()->can('manage_role'))
                     <li><a href="{{ route('role.index') }}"><i class="fa fa-edit"></i> Manage Role </a></li>
                 @endif
