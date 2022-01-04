@@ -12,7 +12,8 @@ class SearchUserController extends Controller
     {
         $term = $request->name;
 
-        $users = User::where('name', 'LIKE', '%'.$term.'%')
+        $users = User::where('first_name', 'LIKE', '%'.$term.'%')
+                        ->orWhere('last_name', 'LIKE', '%'.$term.'%')
                         ->orWhere('email', 'LIKE', '%'.$term.'%')
                         ->take(20)->get();
 

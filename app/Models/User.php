@@ -53,5 +53,24 @@ class User extends Authenticatable
     public function getFullNameAttribute() {
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
-    
+
+    public function attempt()
+    {
+        return $this->hasMany(UserAttemptQuiz::class)->orderBy('id', 'DESC');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::Class);
+    }
+
+    public function user_question()
+    {
+        return $this->hasMany(UserQuestionAnswer::class);
+    }
+
+    public function user_question_ans()
+    {
+        return $this->hasMany(UserQuestionAnswer::class)->where('is_right',1);
+    }    
 }

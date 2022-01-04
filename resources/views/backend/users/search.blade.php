@@ -46,7 +46,7 @@
                     <tbody>
                         @foreach ($users as $user)
                             <tr>
-                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->created_at->format('F d, Y h:ia') }}</td>
                                 <td>{{  ucwords($user->roles()->pluck('name')->implode(', ')) }}</td>{{-- Retrieve array of roles associated to a user and convert to string --}}
