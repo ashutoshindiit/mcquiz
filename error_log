@@ -90,3 +90,11 @@
 [03-Jan-2022 14:20:31 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
 [03-Jan-2022 14:20:31 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'sqlite.so' (tried: /opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so (/opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so.so (/opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
 [03-Jan-2022 14:20:31 UTC] PHP Warning:  Module 'pdo_mysql' already loaded in Unknown on line 0
+[04-Jan-2022 14:09:15 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[04-Jan-2022 14:09:15 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[04-Jan-2022 14:09:15 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'sqlite.so' (tried: /opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so (/opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so.so (/opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+[04-Jan-2022 14:09:15 UTC] PHP Warning:  Module 'pdo_mysql' already loaded in Unknown on line 0
+[04-Jan-2022 14:09:20 UTC] PHP Warning:  Module 'PDO' already loaded in Unknown on line 0
+[04-Jan-2022 14:09:20 UTC] PHP Warning:  Module 'pdo_sqlite' already loaded in Unknown on line 0
+[04-Jan-2022 14:09:20 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library 'sqlite.so' (tried: /opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so (/opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so: cannot open shared object file: No such file or directory), /opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so.so (/opt/cpanel/ea-php73/root/usr/lib64/php/modules/sqlite.so.so: cannot open shared object file: No such file or directory)) in Unknown on line 0
+[04-Jan-2022 14:09:20 UTC] PHP Warning:  Module 'pdo_mysql' already loaded in Unknown on line 0
